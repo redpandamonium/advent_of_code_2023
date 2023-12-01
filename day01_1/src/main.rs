@@ -1,5 +1,3 @@
-use std::ops::Deref;
-
 fn main() {
     let input = include_str!("input.txt");
     println!("The solution is {}.", trebuchet_value(input));
