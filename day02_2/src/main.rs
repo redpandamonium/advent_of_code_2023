@@ -8,7 +8,6 @@ struct Quantities {
 }
 
 struct Game {
-    id: i32,
     rounds: Vec<Quantities>,
 }
 
@@ -16,9 +15,7 @@ impl FromStr for Game {
     type Err = anyhow::Error;
 
     fn from_str(line: &str) -> Result<Self, Self::Err> {
-        let (game, content) = line.split_once(":").ok_or(anyhow!("Missing ':'"))?;
-        let (_, id) = game.split_once(" ").ok_or(anyhow!("Missing game id"))?;
-        let game_id = i32::from_str(id)?;
+        let (_, content) = line.split_once(":").ok_or(anyhow!("Missing ':'"))?;
         let rounds = content.split(";");
         let mut rounds_vec = Vec::new();
 
@@ -47,7 +44,6 @@ impl FromStr for Game {
             })
         }
         Ok(Game {
-            id: game_id,
             rounds: rounds_vec,
         })
     }
